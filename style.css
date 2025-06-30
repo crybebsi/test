@@ -1,0 +1,54 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #c1e1c1 0%, #8bc34a 100%);
+  color: #1b5e20;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.screen {
+  max-width: 450px;
+  background: #dcedc8;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  text-align: center;
+  width: 90vw;
+}
+.hidden { display: none !important; }
+button {
+  background: #8bc34a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+button:hover:not(:disabled) { background: #7cb342; }
+.ar-question, .ar-timer-bar { box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+.answer-block { cursor: pointer; transition: scale 0.2s; }
+.answer-block:hover { scale: 1.05 1.05 1; }
+
+#ar-scene {
+  transform-origin: center;
+  transform: scale(1);
+  perspective: 1000px;
+}
+
+a-camera, a-entity {
+  pointer-events: none; /* Verhindert unerwünschte Interaktionen */
+}

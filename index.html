@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Dino Quizmaster 🦖</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/ar.js/aframe/build/aframe-ar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
+  <link rel="preload" as="image" href="dino_bebis/bebi_velociraptor.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_trex.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_parasaurolophus.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_1.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_2.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_3.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_4.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_5.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_6.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_7.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_8.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_9.png">
+  <link rel="preload" as="image" href="dino_bebis/bebi_10.png">
+</head>
+<body>
+
+<div id="start-screen" class="screen">
+  <h1>Dino Quizmaster 🦖</h1>
+  <p style="font-size: 0.9rem; margin-bottom: 10px;">
+    📱 Halte dein Gerät so, wie du während des Spiels spielen möchtest (Hoch- oder Querformat).<br>
+    Die Ausrichtung wird beim Start des Quiz fixiert.
+  </p>
+  <button id="start-ar-button">Quiz starten</button>
+</div>
+
+<a-scene
+  id="ar-scene"
+  embedded
+  device-orientation-permission-ui="enabled: true"
+  style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;"
+  arjs="sourceType: device; debugUIEnabled: false; detectionMode: mono_and_matrix;">
+  <a-entity id="question-progress" position="1.2 2 -2" troika-text="value:; align: right; fontSize: 0.1; maxWidth: 1.5; color: #333;"></a-entity>
+  <a-entity id="ar-question" class="ar-question" position="0 1.8 -2" troika-text="value: Lade Frage...; align: center; fontSize: 0.1; maxWidth: 2.5;"></a-entity>
+  <a-entity id="ar-answers" position="0 0.5 -2"></a-entity>
+  <a-plane id="ar-timer-bar" class="ar-timer-bar" height="0.05" width="1.8" position="0 0.4 -2"></a-plane>
+  <a-camera
+    look-controls="enabled: true"
+    wasd-controls="enabled: false">
+    <a-cursor
+      raycaster="objects: .answer-block"
+      fuse="true"
+      fuse-timeout="1500"
+      color="white"
+      animation__fusing="property: scale; startEvents: fusing; easing: easeInQuad; dur: 1000; from: 1 1 1; to: 0.1 0.1 0.1">
+    </a-cursor>
+  </a-camera>
+  <a-image id="ar-dino"
+           position="0 1.2 -1.5"
+           scale="0 0 0"
+           src=""
+           transparent="true"
+           visible="false">
+  </a-image>
+</a-scene>
+
+<div id="result-screen" class="screen hidden">
+  <h2>Ergebnis</h2>
+  <p id="result-text"></p>
+  <button id="restart-button" class="hidden" onclick="location.reload()">Neu starten</button>
+</div>
+
+<audio id="sound-correct" src="sounds/correct-choice-43861.mp3"></audio>
+<audio id="sound-wrong" src="sounds/wronganswer-37702.mp3"></audio>
+<audio id="sound-timeout" src="sounds/ticking-bomb-90319.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
